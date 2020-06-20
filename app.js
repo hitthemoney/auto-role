@@ -7,6 +7,13 @@ var PREFIX = ",";
 
 bot.on("ready", () => {
     console.log("The bot is online!");
+    client.user.setPresence({
+        status: "online",
+        game: {
+            name: 'Playing ",help"', 
+            type: "STREAMING"
+        }
+    });
 })
 
 bot.on("message", message => {
