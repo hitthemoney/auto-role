@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 
-app.get('/*', (req, res) => res.send(`<meta http-equiv="Refresh" content="0; url='https://discord.com/api/oauth2/authorize?client_id=686755243148705831&permissions=8&scope=bot'"/>`))
+app.get('/*', (req, res) => res.redirect(301, "https://discord.com/api/oauth2/authorize?client_id=686755243148705831&permissions=8&scope=bot"))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
