@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
-const token = process.env.TOKEN;
+var token = process.env.TOKEN;
 
 var PREFIX = ",";
 
@@ -10,7 +10,20 @@ bot.on("ready", () => {
 })
 
 bot.on("message", message => {
-    let user = message.mentions.members.first()
+    function addRemoveRole(role, args, member) {
+        try {
+            if (args[1].toLowerCase() !== "remove") {
+                member.roles.add(role);
+                message.channel.send("You have been given the role **Giveaways**.")
+            } else {
+                member.roles.remove(role);
+                message.channel.send("The Role **Giveaways** has been removed from you.")
+            }
+        } catch {
+            member.roles.add(role);
+            message.channel.send("You have been given the role **Giveaways**.")
+        }
+    }
     if (message.author.id == "159985870458322944") {
         let msg = message.content;
         try {
@@ -26,21 +39,48 @@ bot.on("message", message => {
         }
     }
 
-    let args = message.content.replace(PREFIX, "").split(" ")
+    if (message.content.slice(PREFIX.length) == message.content.replace(PREFIX, "")) {
+        let args = message.content.replace(PREFIX, "").split(" ")
+        let member = message.guild.members.cache.get(message.author.id);
+        var role;
 
-    switch (args[0]) {
-        case "help":
-            message.channel.send("**Prefix**: `,`\n**Commands**:\n*help* - this command")
-            break;
-        case "verify":
-            try {
-                let role = message.guild.roles.cache.find(role => role.name === 'Member');
-                message.guild.members.cache.get(message.author.id).roles.add(role);
-                message.delete();
-            } catch (err) {
-                console.log(err);
-            }
-            break;
+        switch (args[0].toLowerCase()) {
+            case "help":
+                message.channel.send('**Prefix**: `,`\n**Commands**:\n*help* - this command\n*verify* - gives you the "Member" Role')
+                break;
+            case "verify":
+                try {
+                    let user = message.guild.members.cache.get(message.author.id);
+                    if (user.roles.cache.some(role => role.name == 'Member')) {
+                        message.channel.send(`You are already already verified on the server! <@${message.author.id}>`)
+                            .then(msg => {
+                                setTimeout(() => {
+                                    msg.delete()
+                                }, 5000);
+                            })
+                            .catch(console.error);
+                    } else {
+                        let role = message.guild.roles.cache.find(role => role.name == 'Member');
+                        user.roles.add(role);
+                        message.delete();
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+                break;
+            case "giveaways":
+                role = message.guild.roles.cache.find(role => role.name == 'Giveaways');
+                addRemoveRole(role, args, member)
+                break;
+            case "ping":
+                role = message.guild.roles.cache.find(role => role.name == 'Ping');
+                addRemoveRole(role, args, member)
+                break;
+            case "updates":
+                role = message.guild.roles.cache.find(role => role.name == 'Updates');
+                addRemoveRole(role, args, member)
+                break;
+        }
     }
 })
 
