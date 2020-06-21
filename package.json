@@ -8,7 +8,7 @@
     "start": "node app.js"
   },
   "author": "hitthemoney",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^12.2.0"
   }
