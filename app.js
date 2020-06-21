@@ -55,7 +55,8 @@ bot.on("message", message => {
                         message.channel.send(`You are already already verified on the server! <@${message.author.id}>`)
                             .then(msg => {
                                 setTimeout(() => {
-                                    msg.delete()
+                                    message.delete();
+                                    msg.delete();
                                 }, 5000);
                             })
                             .catch(console.error);
