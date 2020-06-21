@@ -46,7 +46,7 @@ bot.on("message", message => {
 
         switch (args[0].toLowerCase()) {
             case "help":
-                message.channel.send('**Prefix**: `,`\n**Commands**:\n*help* - this command\n*verify* - gives you the "Member" Role\n*giveaways* - gives you the "Giveaways" Role\n*ping* - gives you the "Ping" Role\n*updates* - gives you the "Updates" Role')
+                message.channel.send('**Prefix**: `,`\n**Commands**:\n*help* - this command\n*verify* - gives you the "Member" Role\n*giveaways* - gives you the "Giveaways" Role\n*ping* - gives you the "Ping" Role\n*updates* - gives you the "Updates" Role\n Do `,<updates, ping, or, giveaways> remove` if you want the role to be removed!')
                 break;
             case "verify":
                 try {
