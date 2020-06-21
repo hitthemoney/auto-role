@@ -7,13 +7,6 @@ var PREFIX = ",";
 
 bot.on("ready", () => {
     console.log("The bot is online!");
-    bot.user.setPresence({
-        game: {
-            name: ',help',
-            type: "STREAMING",
-            url: "https://www.twitch.tv/hitthemoney"
-        }
-    });
 })
 
 bot.on("message", message => {
