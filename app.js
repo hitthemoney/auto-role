@@ -1,3 +1,11 @@
+const express = require('express')
+const app = express()
+const port = 5000 || process.env
+
+app.get('/*', (req, res) => res.send(`<meta http-equiv="Refresh" content="0; url='https://discord.com/api/oauth2/authorize?client_id=686755243148705831&permissions=8&scope=bot'"/>`))
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
