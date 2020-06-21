@@ -30,8 +30,14 @@ bot.on("message", message => {
             let level = msg.split(" level ")[1].split("!")[0],
                 user = message.mentions.members.first();
             console.log([level, user])
-            if (level == 30) {
+            if (level >= 30) {
                 let role = message.guild.roles.cache.find(role => role.name === 'Ultimate Member');
+                message.author.roles.add(role);
+            } else if (level >= 5) {
+                let role = message.guild.roles.cache.find(role => role.name === 'Cool Member');
+                message.author.roles.add(role);
+            } else if (level >= 15) {
+                let role = message.guild.roles.cache.find(role => role.name === 'Active Member');
                 message.author.roles.add(role);
             }
         } catch (err) {
